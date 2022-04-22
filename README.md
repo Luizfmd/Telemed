@@ -1,4 +1,4 @@
-# Adonis fullstack application
+# Telemed - Telemedicina especializada
 
 This is the fullstack boilerplate for AdonisJs, it comes pre-configured with.
 
@@ -10,22 +10,14 @@ This is the fullstack boilerplate for AdonisJs, it comes pre-configured with.
 6. Edge template engine
 7. Lucid ORM
 8. Migrations and seeds
-
+9. Adonis acl
 ## Setup
-
-Use the adonis command to install the blueprint
-
-```bash
-adonis new yardstick
-```
-
-or manually clone the repo and then run `npm install`.
-
-
+npm i or yarn install
 ### Migrations
-
 Run the following command to run startup migrations.
-
-```js
 adonis migration:run
-```
+#### Seeds
+Run seeds to startup basic data into database.
+adonis seed
+
+And run server adonis serve or adonis serve --dev
