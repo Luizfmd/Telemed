@@ -1,0 +1,52 @@
+@layout('template')
+
+
+@section('content')
+    <section class="section-container">
+        <div class="content-wrapper">
+            <div class="content-heading">
+                <div><small data-localize=""></small>Consultas</div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-12 col-12 col-sm-12 col-xl-8 align-self-center">
+                    <form id="consultation_form" method="POST" action="{{route('consultation.store')}}" data-parsley-validate="" novalidate="">
+                        {{ csrfField() }}
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <div class="card-title"><em class="icon-note"></em> Visualizar</div>
+                                <hr>
+                            </div>
+                            <div class="card-body" style="font-size: 18px;">
+                              <ul>
+                                <li>Médico: <strong>{{ consultation.doctor_name || 'Indefinido'}}</strong></li>
+                                <li>Paciente: <strong>{{ consultation.patient_name || 'Indefinido'}}</strong></li>
+                                <li>Marcado em: <strong>{{ normalizeTimestamp(consultation.starts_at) }}</strong></li>
+                                <li>Termina em: <strong>{{ normalizeTimestamp(consultation.ends_at) }}</strong></li>
+                              <li>Link do Atendimento: <strong><a href="{{url}}/room?r={{consultation.room}}">{{url || 'intramedicos.com.br'}}/room?r={{consultation.room}}</a></strong></li>
+                                <li>Senha do Médico: <strong>{{consultation.doctor_password}}</strong></li>
+                                <li>Senha do Paciente: <strong>{{consultation.patient_password}}</strong></li>
+                                <li>Observações: <strong>{{consultation.description || 'Nenhuma'}}</strong></li>
+                              </ul>
+                            </div>
+                            <div class="card-footer">
+                                <div class="clearfix">
+                                    <div class="float-right">
+                                        <button class="btn btn-default" onclick="goBack()" type="reset">Voltar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </section>
+@endsection
+
+@section('scripts')
+<script>
+  function goBack() {
+    window.history.back();
+  }
+  </script>
+@endsection

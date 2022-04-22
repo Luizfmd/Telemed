@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+   <meta name="description" content="Telemed">
+   <meta name="theme-color" content="#43c2e9">
+   <meta name="keywords" content="Telemed, consulta médica, opinião médica, videoconferência médica">
+   <link rel="apple-touch-icon" sizes="57x57" href="/public/icon/apple-icon-57x57.png">
+   <link rel="apple-touch-icon" sizes="60x60" href="/public/icon/apple-icon-60x60.png">
+   <link rel="apple-touch-icon" sizes="72x72" href="/public/icon/apple-icon-72x72.png">
+   <link rel="apple-touch-icon" sizes="76x76" href="/public/icon/apple-icon-76x76.png">
+   <link rel="apple-touch-icon" sizes="114x114" href="/public/icon/apple-icon-114x114.png">
+   <link rel="apple-touch-icon" sizes="120x120" href="/public/icon/apple-icon-120x120.png">
+   <link rel="apple-touch-icon" sizes="144x144" href="/public/icon/apple-icon-144x144.png">
+   <link rel="apple-touch-icon" sizes="152x152" href="/public/icon/apple-icon-152x152.png">
+   <link rel="apple-touch-icon" sizes="180x180" href="/public/icon/apple-icon-180x180.png">
+   <link rel="icon" type="image/png" sizes="192x192"  href="/public/icon/android-icon-192x192.png">
+   <link rel="icon" type="image/png" sizes="32x32" href="/public/icon/favicon-32x32.png">
+   <link rel="icon" type="image/png" sizes="96x96" href="/public/icon/favicon-96x96.png">
+   <link rel="icon" type="image/png" sizes="16x16" href="/public/icon/favicon-16x16.png">
+   <link rel="manifest" href="/public/icon/manifest.json">
+   <meta name="msapplication-TileColor" content="#43c2e9">
+   <meta name="msapplication-TileImage" content="/public/icon/ms-icon-144x144.png">
+   <meta name="theme-color" content="#43c2e9">
+   <link rel="icon" type="image/x-icon" href="/public/icon/favicon.ico">
+   
+   <title>Telemed - {{title || 'Telemedicina especializada'}}</title><!-- =============== VENDOR STYLES ===============-->
+
+   {{ style('/vendor/@fortawesome/fontawesome-free/css/brands.css') }}
+   {{ style('/vendor/@fortawesome/fontawesome-free/css/regular.css') }}
+   {{ style('/vendor/@fortawesome/fontawesome-free/css/solid.css') }}
+   {{ style('/vendor/@fortawesome/fontawesome-free/css/fontawesome.css') }}
+   {{ style('/vendor/simple-line-icons/css/simple-line-icons.css') }}
+   {{ style('/vendor/animate.css/animate.css') }}
+   {{ style('/vendor/whirl/dist/whirl.css') }}
+
+   {{ style('/vendor/weather-icons/css/weather-icons.css')}}
+   {{ style('/css/bootstrap.css')}}
+   {{ style('/css/app.css')}}
+   @!section('stylesheets')
+
+   {{ style('/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}
+   {{ style('/vendor/bootstrap-slider/dist/css/bootstrap-slider.css') }}
+   {{ style('/vendor/chosen-js/chosen.css') }}
+   {{ style('/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.css') }}
+   {{ style('/vendor/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css') }}
+   {{ style('/vendor/select2/dist/css/select2.css') }}
+   {{ style('/vendor/@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.css') }}
+   {{ style('/vendor/bootstrap-wysiwyg/css/style.css') }}
+</head>
+
+<body>
+   <div class="wrapper">
+      <header class="topnavbar-wrapper">
+         <nav class="navbar topnavbar">
+            <div class="navbar-header"><a class="navbar-brand" href="#/">
+                  <div class="brand-logo" style="color:white;">Telemed</div>
+                  <div class="brand-logo-collapsed"><h2 style="color:white;">IM</h2></div>
+               </a>
+            </div>
+            
+            <ul class="navbar-nav mr-auto flex-row">
+               <li class="nav-item">
+                  <a class="nav-link d-none d-md-block d-lg-block d-xl-block" href="#" data-trigger-resize="" data-toggle-state="aside-collapsed"><em class="fas fa-bars"></em></a><!-- Button to show/hide the sidebar on mobile. Visible on mobile only.--><a class="nav-link sidebar-toggle d-md-none" href="#" data-toggle-state="aside-toggled" data-no-persist="true"><em class="fas fa-bars"></em></a>
+               </li>
+            </ul>
+            
+            <ul class="navbar-nav flex-row">
+               <li class="nav-item d-none d-md-block"><a class="nav-link" href="#" data-toggle-fullscreen=""><em class="fas fa-expand"></em></a></li><!-- START Alert menu-->
+            <li class="nav-item"><a class="nav-link" href="{{route('auth.destroy')}}"><em class="icon-logout"></em></a></li><!-- END Offsidebar menu-->
+            </ul>
+            <form class="navbar-form" role="search" action="search.html">
+               <div class="form-group"><input class="form-control" type="text" placeholder="Type and hit enter ...">
+                  <div class="fas fa-times navbar-form-close" data-search-dismiss=""></div>
+               </div><button class="d-none" type="submit">Submit</button>
+            </form>
+         </nav>
+      </header>
+      <aside class="aside-container">
+         <div class="aside-inner">
+            <nav class="sidebar" data-sidebar-anyclick-close="">
+               <ul class="sidebar-nav">
+                  <li class="nav-heading "><span>Menu</span></li>
+                  <li class=" ">
+                     <a href="{{route('dashboard.index')}}" title="Dashboard">
+                        <em class="icon-speedometer"></em><span>Dashboard</span>
+                     </a>
+                  </li>
+                  <li class=" ">
+                     <a href="#consultas" title="Consultas" data-toggle="collapse">
+                        <em class="icon-note"></em><span>Consultas</span>
+                     </a>
+                     <ul class="sidebar-nav sidebar-subnav collapse" id="consultas">
+                        <li class="sidebar-subnav-header">Consultas</li>
+                        <li class=" "><a href="{{ route('consultation.create') }}" title="Nova consulta"><span>Agendar</span></a></li>
+                        <li class=" "><a href="{{ route('consultation.index') }}" title="Listar consultas"><span>Ver todas</span></a></li>
+                     </ul>
+                  </li>
+                  <li class=" ">
+                     <a href="#usuarios" title="Usuários" data-toggle="collapse">
+                        <em class="icon-user"></em><span>Usuários</span>
+                     </a>
+                     <ul class="sidebar-nav sidebar-subnav collapse" id="usuarios">
+                        <li class="sidebar-subnav-header">Usuários</li>
+                        <li class=" "><a href="{{ route('users.create') }}" title="Cadastrar usuário"><span>Cadastrar</span></a></li>
+                        <li class=" "><a href="{{ route('users.index') }}" title="Listar usuários"><span>Ver todos</span></a></li>
+                     </ul>
+                  </li>
+               </ul>
+            </nav>
+         </div>
+      </aside>
+      @!section('content')
+      <!-- Page footer-->
+      <footer class="footer-container"><span>&copy; 2022 - Telemed</span></footer>
+   </div><!-- =============== VENDOR SCRIPTS ===============-->
+   <!-- MODERNIZR-->
+   {{ script('/vendor/modernizr/modernizr.custom.js')}} <!-- STORAGE API-->
+   {{ script('/vendor/js-storage/js.storage.js')}} <!-- SCREENFULL-->
+   {{ script('/vendor/screenfull/dist/screenfull.js')}} <!-- i18next-->
+   {{ script('/vendor/i18next/i18next.js')}}
+   {{ script('/vendor/i18next-xhr-backend/i18nextXHRBackend.js')}}
+   {{ script('/vendor/jquery/dist/jquery.js')}}
+   {{ script('/vendor/popper.js/dist/umd/popper.js')}}
+   {{ script('/vendor/bootstrap/dist/js/bootstrap.js')}}
+   <!-- SLIMSCROLL-->
+   {{ script('/vendor/jquery-slimscroll/jquery.slimscroll.js') }}
+   {{ script('/vendor/jquery-sparkline/jquery.sparkline.js') }}
+   {{ script('/vendor/flot/jquery.flot.js') }}
+   {{ script('/vendor/jquery.flot.tooltip/js/jquery.flot.tooltip.js') }}
+   {{ script('/vendor/flot/jquery.flot.resize.js') }}
+   {{ script('/vendor/flot/jquery.flot.pie.js') }}
+   {{ script('/vendor/flot/jquery.flot.time.js') }}
+   {{ script('/vendor/flot/jquery.flot.categories.js')}}
+   {{ script('/vendor/jquery.flot.spline/jquery.flot.spline.js')}} <!-- EASY PIE CHART-->
+   {{ script('/vendor/easy-pie-chart/dist/jquery.easypiechart.js')}} <!-- MOMENT JS-->
+   {{ script('/vendor/moment/min/moment-with-locales.js')}} <!-- =============== APP SCRIPTS ===============-->
+   @!section('scripts')
+   {{ script('/js/app.js') }}
+
+   {{ script('/vendor/bootstrap-filestyle/src/bootstrap-filestyle.js') }}
+   {{ script('/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.js') }}
+   {{ script('/vendor/chosen-js/chosen.jquery.js') }}
+   {{ script('/vendor/bootstrap-slider/dist/bootstrap-slider.js') }}
+   {{ script('/vendor/inputmask/dist/jquery.inputmask.bundle.js') }}
+   {{ script('/vendor/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js') }}
+   {{ script('/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.js') }}
+   {{ script('/vendor/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js') }}
+   {{ script('/vendor/select2/dist/js/select2.full.js') }}
+   {{ script('/vendor/parsleyjs/dist/parsley.js') }}
+   {{ script('/vendor/sweetalert/dist/sweetalert.min.js')}}
+   @if(old('message'))
+   <script>
+     swal('{{old('message')}}', {
+      buttons: false,
+      icon: '{{old('type')}}',
+      timer: {{old('delay')}},
+    });
+   </script>
+   @endif
+   <script>
+     $('#datatable').DataTable({
+      'paging': true,
+      // Table pagination
+      'ordering': true,
+      // Column ordering
+      'info': true,
+      // Bottom left status text
+      responsive: true,
+      // Text translation options
+      // Note the required keywords between underscores (e.g _MENU_)
+      oLanguage: {
+        sSearch: '<em class="fas fa-search"></em>',
+        sLengthMenu: '_MENU_ registros por página',
+        info: 'Mostrando page _PAGE_ de _PAGES_',
+        sInfo: "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+        zeroRecords: 'Nada encontrado - sorry',
+        infoEmpty: 'Nenhum registro disponível',
+        infoFiltered: '(filtered from _MAX_ total records)',
+        oPaginate: {
+          sNext: '<em class="fa fa-caret-right"></em>',
+          sPrevious: '<em class="fa fa-caret-left"></em>'
+        }
+      }
+    });
+   </script>
+</body>
+
+</html>
+

@@ -1,0 +1,104 @@
+@layout('template')
+
+@section('content')
+    <section class="section-container">
+        <div class="content-wrapper">
+            <div class="content-heading">
+                <div><small data-localize=""></small>Consultas</div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-12 col-12 col-sm-12 col-xl-6 align-self-center">
+                    <form id="consultation_form" method="POST" action="{{route('consultation.update', { id: consultation.id })+'?_method=PUT'}}">
+                        {{ csrfField() }}
+                        @if(consultation.id)
+                          <input type="hidden" name="id" value="{{consultation.id }}">
+                        @endif
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <div class="card-title"><em class="icon-note"></em> Editar</div>
+                                <hr>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-6 col-12">
+                                            <label class="col-form-label">Nome do paciente *</label>
+                                            <input class="form-control" type="text" name="patient_name" value="{{consultation.patient_name}}" required="required">
+                                        </div>
+                                        <div class="col-md-6 col-12">
+                                            <label class="col-form-label">Nome do médico *</label>
+                                            <input class="form-control" type="text" name="doctor_name" value="{{consultation.doctor_name}}" required="required">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                  <div class="row">
+                                      <div class="col-md-6 col-12">
+                                          <label class="col-form-label">Senha do paciente</label>
+                                      <input class="form-control" type="text" name="patient_password" value="{{consultation.patient_password}}" required>
+                                      </div>
+                                      <div class="col-md-6 col-12">
+                                          <label class="col-form-label">Senha do médico</label>
+                                      <input class="form-control" type="text" name="doctor_password" value="{{consultation.doctor_password}}" required>
+                                      </div>
+                                  </div>
+                              </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-6 col-12">
+                                            <label class="col-form-label">Consulta começa em *</label>
+                                            <input class="form-control" type="text" name="starts_at" required="required" data-masked="" data-inputmask="'mask': '99/99/9999 99:99:99'" value="{{normalizeTimestamp(consultation.starts_at)}}">
+                                        </div>
+                                        <div class="col-md-6 col-12">
+                                            <label class="col-form-label">Consulta termina em *</label>
+                                            <input class="form-control" type="text" name="ends_at" required="required" data-masked="" data-inputmask="'mask': '99/99/9999 99:99:99'" value="{{normalizeTimestamp(consultation.ends_at)}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                  <div class="row">
+                                      <div class="col-md-12">
+                                          <label class="col-form-label">Link do atendimento</label>
+                                          <div class="input-group" id="room">
+                                          <input class="form-control" type="text" value="{{url}}/room?r={{consultation.room}}" disabled>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="col-form-label">Observações</label>
+                                            <div class="input-group" id="description">
+                                                <textarea class="form-control" name="description" type="text" rows="4">{{ consultation.description || ''}}
+                                                </textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="clearfix">
+                                    <div class="float-right">
+                                        <button class="btn btn-default" onclick="goBack()" type="reset">Cancelar</button>
+                                        <button class="btn bg-intramedicos text-light" id="button-submit" type="submit">Editar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </section>
+@endsection
+
+
+
+@section('scripts')
+<script>
+function goBack() {
+    window.history.back();
+  }
+</script>
+@endsection

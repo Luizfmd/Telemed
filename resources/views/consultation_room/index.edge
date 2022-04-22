@@ -1,0 +1,101 @@
+@layout('consultation_room.template')
+
+@section('content')
+<section class="section-container">
+  <div class="content-wrapper">
+    <div class="row">
+    <div class="col-xl-7">
+      <div class="card mb-3 border-secondary">
+         <div class="card-header bg-secondary"><em class="mr-2 fas fa-video"></em> Chamada de Video</div>
+         <div class="card-body">
+          <div id="meet"></div>
+         </div>
+      </div>
+   </div>
+
+   <div class="col-xl-5">
+    <div class="card card-default">
+       <div class="card-header">
+          <div class="card-title"><em class="mr-2 fab fa-facebook-messenger"></em>Chat</div>
+       </div><!-- START list group-->
+       <div class="slimScrollDiv" id="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 400px; overflow-y: scroll;">
+          <!-- START list group item-->
+          <div id="box">
+          </div>
+       </div>
+       <!-- START card footer-->
+       <div class="card-footer">
+          <div class="input-group"><input class="form-control form-control-sm" id="textarea" type="text" placeholder="Digite sua mensagem aqui"><span class="input-group-btn"><button class="btn btn-secondary btn-sm" id="button-chat" type="submit" onclick="clickChat()"><i class="fa fa-paper-plane"></i></button></span></div>
+       </div><!-- END card-footer-->
+    </div>
+  </div>
+  </div>
+
+</section>
+
+@endsection
+
+@section('scripts')
+<script src='https://meet.jit.si/external_api.js'></script>
+<script type="text/javascript">
+const domain = 'meet.jit.si';
+const options = {
+    roomName: 'intramedicos_room{{consultation.id}}',
+    width: '100%',
+    height: 500,
+    parentNode: document.querySelector('#meet'),
+};
+const api = new JitsiMeetExternalAPI(domain, options);
+api.executeCommand('displayName', '{{username || "Indefinido"}}');
+
+</script>
+{{ script('https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js') }}
+{{ script('https://unpkg.com/@adonisjs/websocket-client@1.0.9/dist/Ws.browser.js') }}
+<script>
+  let ws = adonis.Ws('ws://localhost:3333').connect()
+
+  ws.on('open', () => {
+    console.log("Aberto")
+  })
+
+  ws.on('error', () => {
+    console.log("Error");
+  })
+
+  ws.on('close', () => {
+
+  })
+
+  const chat = ws.subscribe('chat');
+
+  const textarea = document.querySelector('#textarea')
+  const messageBox = document.querySelector('#box')
+  const section = document.querySelector('#slimScrollDiv')
+
+
+
+  textarea.addEventListener('keypress', (e) => {
+    if(e.code === "Enter") {
+      e.preventDefault();
+      chat.emit("message", { text: textarea.value, name: '{{username}}'} )
+      textarea.value = "";
+    }
+  })
+
+  function clickChat() {
+    if(textarea.value !== "") {
+      chat.emit("message", { text: textarea.value, name: '{{username}}'} )
+      textarea.value = "";
+    }
+  }
+
+  chat.on("message", (data) => {
+      var li = document.createElement('div')
+      li.innerHTML = '<div class="list-group-item list-group-item-action"><div class="media"><div class="media-body text-truncate"><p class="mb-1"><strong class="text-primary"><span class="circle bg-success circle-lg text-left"></span><span>'+data.name+'</span></strong></p><p class="mb-1 text-sm">'+data.text+'</p></div><div class="ml-auto"><small class="text-muted ml-2">'+data.hour+'</small></div></div></div>';
+      messageBox.appendChild(li)
+      section.scrollTop = section.scrollHeight
+  })
+</script>
+
+
+@endsection

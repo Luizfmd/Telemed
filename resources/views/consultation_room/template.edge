@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+   <meta name="description" content="Telemed">
+   <meta name="theme-color" content="#43c2e9">
+   <meta name="keywords" content="Telemed, consulta médica, opinião médica, videoconferência médica">
+   <link rel="apple-touch-icon" sizes="57x57" href="/public/icon/apple-icon-57x57.png">
+   <link rel="apple-touch-icon" sizes="60x60" href="/public/icon/apple-icon-60x60.png">
+   <link rel="apple-touch-icon" sizes="72x72" href="/public/icon/apple-icon-72x72.png">
+   <link rel="apple-touch-icon" sizes="76x76" href="/public/icon/apple-icon-76x76.png">
+   <link rel="apple-touch-icon" sizes="114x114" href="/public/icon/apple-icon-114x114.png">
+   <link rel="apple-touch-icon" sizes="120x120" href="/public/icon/apple-icon-120x120.png">
+   <link rel="apple-touch-icon" sizes="144x144" href="/public/icon/apple-icon-144x144.png">
+   <link rel="apple-touch-icon" sizes="152x152" href="/public/icon/apple-icon-152x152.png">
+   <link rel="apple-touch-icon" sizes="180x180" href="/public/icon/apple-icon-180x180.png">
+   <link rel="icon" type="image/png" sizes="192x192"  href="/public/icon/android-icon-192x192.png">
+   <link rel="icon" type="image/png" sizes="32x32" href="/public/icon/favicon-32x32.png">
+   <link rel="icon" type="image/png" sizes="96x96" href="/public/icon/favicon-96x96.png">
+   <link rel="icon" type="image/png" sizes="16x16" href="/public/icon/favicon-16x16.png">
+   <link rel="manifest" href="/public/icon/manifest.json">
+   <meta name="msapplication-TileColor" content="#43c2e9">
+   <meta name="msapplication-TileImage" content="/public/icon/ms-icon-144x144.png">
+   <meta name="theme-color" content="#43c2e9">
+   <link rel="icon" type="image/x-icon" href="/public/icon/favicon.ico">
+   
+   <title>Telemed - {{title || 'Telemedicina especializada'}}</title><!-- =============== VENDOR STYLES ===============-->
+   <!-- FONT AWESOME-->
+   {{ style('/vendor/@fortawesome/fontawesome-free/css/brands.css') }}
+   {{ style('/vendor/@fortawesome/fontawesome-free/css/regular.css') }}
+   {{ style('/vendor/@fortawesome/fontawesome-free/css/solid.css') }}
+   {{ style('/vendor/@fortawesome/fontawesome-free/css/fontawesome.css') }}
+   {{ style('/vendor/simple-line-icons/css/simple-line-icons.css') }}
+   {{ style('/vendor/animate.css/animate.css') }}
+   {{ style('/vendor/whirl/dist/whirl.css') }}
+   <!-- WEATHER ICONS-->
+   {{ style('/vendor/weather-icons/css/weather-icons.css')}}
+   {{ style('/css/bootstrap.css')}}
+   {{ style('/css/app.css')}}
+   @!section('stylesheets')
+
+   <!-- TAGS INPUT-->
+   {{ style('/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}
+   {{ style('/vendor/bootstrap-slider/dist/css/bootstrap-slider.css') }}
+   {{ style('/vendor/chosen-js/chosen.css') }}
+   {{ style('/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.css') }}
+   {{ style('/vendor/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css') }}
+   {{ style('/vendor/select2/dist/css/select2.css') }}
+   {{ style('/vendor/@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.css') }}
+   {{ style('/vendor/bootstrap-wysiwyg/css/style.css') }}
+</head>
+
+<body>
+   <div class="wrapper">
+      <!-- top navbar-->
+      <header class="topnavbar-wrapper">
+         <!-- START Top Navbar-->
+         <nav class="navbar topnavbar">
+            <!-- START navbar header-->
+            <div class="navbar-header"><a class="navbar-brand" href="#/">
+                  <div class="brand-logo" style="color:white;">Telemed</div>
+                  <div class="brand-logo-collapsed"><h2 style="color:white;">IM</h2></div>
+               </a></div><!-- END navbar header-->
+            <!-- START Left navbar-->
+            <ul class="navbar-nav mr-auto flex-row">
+               <li class="nav-item">
+                  <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops--><a class="nav-link d-none d-md-block d-lg-block d-xl-block" href="#" data-trigger-resize="" data-toggle-state="aside-collapsed"><em class="fas fa-bars"></em></a><!-- Button to show/hide the sidebar on mobile. Visible on mobile only.--><a class="nav-link sidebar-toggle d-md-none" href="#" data-toggle-state="aside-toggled" data-no-persist="true"><em class="fas fa-bars"></em></a></li><!-- START User avatar toggle-->
+            </ul><!-- END Left navbar-->
+            <!-- START Right Navbar-->
+            <ul class="navbar-nav flex-row">
+               <li class="nav-item d-none d-md-block"><a class="nav-link" href="#" data-toggle-fullscreen=""><em class="fas fa-expand"></em></a></li><!-- START Alert menu-->
+
+               <!-- START Offsidebar button-->
+            <li class="nav-item"><a class="nav-link" href="{{route('room.destroy', { room: consultation.room })}}"><em class="icon-logout"></em></a></li><!-- END Offsidebar menu-->
+            </ul><!-- END Right Navbar-->
+         </nav><!-- END Top Navbar-->
+      </header><!-- sidebar-->
+      <aside class="aside-container">
+         <!-- START Sidebar (left)-->
+         <div class="aside-inner">
+            <nav class="sidebar" data-sidebar-anyclick-close="">
+               <!-- START sidebar nav-->
+               <ul class="sidebar-nav">
+                  <!-- Iterates over all sidebar items-->
+                  <li class="nav-heading "><span>Menu</span></li>
+                  <li>
+                     <a href="{{route('room.index', {id: consultation.id})}}" title="Canal de Atendimento">
+                        <em class="icon-grid"></em><span> Canal de Atendimento</span>
+                     </a>
+                  </li>
+
+               </ul><!-- END sidebar nav-->
+            </nav>
+         </div><!-- END Sidebar (left)-->
+      </aside><!-- offsidebar-->
+      @!section('content')
+      <!-- Page footer-->
+      <footer class="footer-container"><span>&copy; 2022 - Telemed</span></footer>
+   </div><!-- =============== VENDOR SCRIPTS ===============-->
+   <!-- MODERNIZR-->
+   {{ script('/vendor/modernizr/modernizr.custom.js')}} <!-- STORAGE API-->
+   {{ script('/vendor/js-storage/js.storage.js')}} <!-- SCREENFULL-->
+   {{ script('/vendor/screenfull/dist/screenfull.js')}} <!-- i18next-->
+   {{ script('/vendor/i18next/i18next.js')}}
+   {{ script('/vendor/i18next-xhr-backend/i18nextXHRBackend.js')}}
+   {{ script('/vendor/jquery/dist/jquery.js')}}
+   {{ script('/vendor/popper.js/dist/umd/popper.js')}}
+   {{ script('/vendor/bootstrap/dist/js/bootstrap.js')}}
+   <!-- SLIMSCROLL-->
+   {{ script('/vendor/jquery-slimscroll/jquery.slimscroll.js') }}
+   {{ script('/vendor/jquery-sparkline/jquery.sparkline.js') }}
+   {{ script('/vendor/flot/jquery.flot.js') }}
+   {{ script('/vendor/jquery.flot.tooltip/js/jquery.flot.tooltip.js') }}
+   {{ script('/vendor/flot/jquery.flot.resize.js') }}
+   {{ script('/vendor/flot/jquery.flot.pie.js') }}
+   {{ script('/vendor/flot/jquery.flot.time.js') }}
+   {{ script('/vendor/flot/jquery.flot.categories.js')}}
+   {{ script('/vendor/jquery.flot.spline/jquery.flot.spline.js')}} <!-- EASY PIE CHART-->
+   {{ script('/vendor/easy-pie-chart/dist/jquery.easypiechart.js')}} <!-- MOMENT JS-->
+   {{ script('/vendor/moment/min/moment-with-locales.js')}} <!-- =============== APP SCRIPTS ===============-->
+   @!section('scripts')
+   {{ script('/js/app.js') }}
+
+   {{ script('/vendor/bootstrap-filestyle/src/bootstrap-filestyle.js') }}
+   {{ script('/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.js') }}
+   {{ script('/vendor/chosen-js/chosen.jquery.js') }}
+   {{ script('/vendor/bootstrap-slider/dist/bootstrap-slider.js') }}
+   {{ script('/vendor/inputmask/dist/jquery.inputmask.bundle.js') }}
+   {{ script('/vendor/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js') }}
+   {{ script('/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.js') }}
+   {{ script('/vendor/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js') }}
+   {{ script('/vendor/select2/dist/js/select2.full.js') }}
+   {{ script('/vendor/parsleyjs/dist/parsley.js') }}
+</body>
+
+</html>
+

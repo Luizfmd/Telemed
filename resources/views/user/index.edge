@@ -1,0 +1,112 @@
+@layout('template')
+
+@section('stylesheets')
+  {{ style('/vendor/datatables.net-bs4/css/dataTables.bootstrap4.css') }}
+  {{ style('/vendor/datatables.net-keytable-bs/css/keyTable.bootstrap.css') }}
+  {{ style('/vendor/datatables.net-responsive-bs/css/responsive.bootstrap.css') }}
+@endsection
+
+@section('content')
+  <section class="section-container">
+    <div class="content-wrapper">
+      <div class="content-heading">
+        Usuários
+        <div class="ml-auto">
+            <h4 class="mb-0"></h4>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-12 col-12 col-sm-12 col-xl-12">
+          <div class="card">
+            <div class="card-header table-header">
+              <div class="card-title">Registros</div>
+              <a href="{{ route('users.create') }}" class="btn btn-oval btn-primary mr-2" type="button">
+                <i class="icon-plus"></i> Novo usuário
+              </a>
+            </div>
+            <div class="card-body">
+              @if(users.length > 0)
+                <table class="table table-striped table-bordered" id="datatable" role="grid" aria-describedby="user-table">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Nome</th>
+                      <th>Email</th>
+                      <th>Grupo</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @each(user in users)
+                      <tr>
+                        <td>{{$loop.index+1}}</td>
+                        <td>{{user.name}}</td>
+                        <td>{{user.email}}</td>
+                        <td></td>
+                        <td class="d-flex justify-content-center">
+                          <a href="{{route('user.show', { id: user.id })}}" class="btn btn-oval btn-warning mr-2" type="button">
+                            <i class="icon-eye"></i>
+                          </a>
+                          
+                          <a href="{{route('user.edit', { id: user.id })}}" class="btn btn-oval btn-primary mr-2" type="button">
+                            <i class="icon-pencil"></i>
+                          </a>
+
+                          <button class="btn btn-oval btn-danger" type="button" data-toggle="modal" data-target="#modal-delete{{user.id}}">
+                            <i class="icon-trash"></i>                              
+                          </button>
+                        </td>
+                      </tr>
+                    @endeach
+                  </tbody>
+                </table>
+              @else
+                <div class="alert alert-danger" role="alert"><strong>Ops!</strong> Não há usuários cadastrados.</div>
+              @endif
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  @each(consultation in consultations)
+    <div class="modal fade" id="modal-delete{{consultation.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Excluir Consulta - {{ consultation.id }}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Você tem certeza que deseja excluir a consulta online do médico <b>{{consultation.doctor_name}}</b> marcado para às <b>{{normalizeTimestamp(consultation.starts_at)}}</b>?
+          </div>
+          <div class="modal-footer">
+            <form method="POST" action="{{ route('consultation.destroy', {id: consultation.id})+'?_method=DELETE'}}">
+              <button type="submit" role="button" class="btn btn-success">Excluir</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  @endeach
+@endsection
+
+@section('scripts')
+  {{ script('/vendor/datatables.net/js/jquery.dataTables.js') }}
+  {{ script('/vendor/datatables.net-bs4/js/dataTables.bootstrap4.js')}}
+  {{ script('/vendor/datatables.net-buttons/js/dataTables.buttons.js') }}
+  {{ script('/vendor/datatables.net-buttons-bs/js/buttons.bootstrap.js') }}
+  {{ script('/vendor/datatables.net-buttons/js/buttons.colVis.js')}}
+  {{ script('/vendor/datatables.net-buttons/js/buttons.flash.js')}}
+  {{ script('/vendor/datatables.net-buttons/js/buttons.html5.js')}}
+  {{ script('/vendor/datatables.net-buttons/js/buttons.print.js')}}
+  {{ script('/vendor/datatables.net-keytable/js/dataTables.keyTable.js')}}
+  {{ script('/vendor/datatables.net-responsive/js/dataTables.responsive.js')}}
+  {{ script('/vendor/datatables.net-responsive-bs/js/responsive.bootstrap.js')}}
+@endsection

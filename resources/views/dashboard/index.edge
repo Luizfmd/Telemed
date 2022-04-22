@@ -1,0 +1,57 @@
+@layout('template')
+
+@section('stylesheets')
+
+@endsection
+
+@section('content')
+<section class="section-container">
+  <!-- Page content-->
+  <div class="content-wrapper">
+     <div class="content-heading">
+        <div>Dashboard<small data-localize="dashboard.WELCOME"></small></div><!-- START Language list-->
+        <div class="ml-auto">
+           <h4 class="mb-0">Seja bem vindo, {{ user.name }}.</h4>
+        </div><!-- END Language list-->
+     </div><!-- START cards box-->
+      <div class="row">
+          <div class="col-xl-3 col-md-6">
+            <!-- START card-->
+            <div class="card flex-row align-items-center align-items-stretch border-0">
+                <div class="col-4 d-flex align-items-center bg-primary-dark justify-content-center rounded-left"><em class="icon-cloud-upload fa-3x"></em></div>
+                <div class="col-8 py-3 bg-primary rounded-right">
+                  <div class="h2 mt-0">1700</div>
+                  <div class="text-uppercase">CONSULTAS MARCADAS</div>
+                </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <!-- START card-->
+            <div class="card flex-row align-items-center align-items-stretch border-0">
+                <div class="col-4 d-flex align-items-center bg-purple-dark justify-content-center rounded-left"><em class="icon-globe fa-3x"></em></div>
+                <div class="col-8 py-3 bg-purple rounded-right">
+                  <div class="h2 mt-0">700</small></div>
+                  <div class="text-uppercase">Usuários cadastrados</div>
+                </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-6 col-md-12">
+            <!-- START card-->
+            <div class="card flex-row align-items-center align-items-stretch border-0">
+                <div class="col-4 d-flex align-items-center bg-green-dark justify-content-center rounded-left"><em class="icon-bubbles fa-3x"></em></div>
+                <div class="col-8 py-3 bg-green rounded-right">
+                  <div class="h2 mt-0">500</div>
+                  <div class="text-uppercase">Médicos cadastrados</div>
+                </div>
+            </div>
+          </div>
+
+     </div>
+  </div>
+</section>
+@endsection
+
+@section('scripts')
+
+@endsection
+

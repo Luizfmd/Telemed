@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+   <meta name="description" content="Telemed">
+   <meta name="theme-color" content="#43c2e9">
+   <meta name="keywords" content="Telemed, consulta médica, opinião médica, videoconferência médica">
+   <link rel="apple-touch-icon" sizes="57x57" href="/public/icon/apple-icon-57x57.png">
+   <link rel="apple-touch-icon" sizes="60x60" href="/public/icon/apple-icon-60x60.png">
+   <link rel="apple-touch-icon" sizes="72x72" href="/public/icon/apple-icon-72x72.png">
+   <link rel="apple-touch-icon" sizes="76x76" href="/public/icon/apple-icon-76x76.png">
+   <link rel="apple-touch-icon" sizes="114x114" href="/public/icon/apple-icon-114x114.png">
+   <link rel="apple-touch-icon" sizes="120x120" href="/public/icon/apple-icon-120x120.png">
+   <link rel="apple-touch-icon" sizes="144x144" href="/public/icon/apple-icon-144x144.png">
+   <link rel="apple-touch-icon" sizes="152x152" href="/public/icon/apple-icon-152x152.png">
+   <link rel="apple-touch-icon" sizes="180x180" href="/public/icon/apple-icon-180x180.png">
+   <link rel="icon" type="image/png" sizes="192x192"  href="/public/icon/android-icon-192x192.png">
+   <link rel="icon" type="image/png" sizes="32x32" href="/public/icon/favicon-32x32.png">
+   <link rel="icon" type="image/png" sizes="96x96" href="/public/icon/favicon-96x96.png">
+   <link rel="icon" type="image/png" sizes="16x16" href="/public/icon/favicon-16x16.png">
+   <link rel="manifest" href="/public/icon/manifest.json">
+   <meta name="msapplication-TileColor" content="#43c2e9">
+   <meta name="msapplication-TileImage" content="/public/icon/ms-icon-144x144.png">
+   <meta name="theme-color" content="#43c2e9">
+   <link rel="icon" type="image/x-icon" href="/public/icon/favicon.ico">
+   
+   <title>Telemed - Painel Administrativo</title>
+  {{ style('/css/bootstrap.css')}}
+  {{ style('/css/app.css')}}
+</head>
+<body>
+  <div class="login-row d-flex justify-content-center align-items-center" style="height: 100%; flex-direction: column;">
+    <img src="/img/logo.png" alt="logo" class="img-fluid mb-4" width="360px" />
+    <div class="col-xl-4">
+    <form method="POST" action="{{route('room.store', { id })}}">
+        <!-- START card-->
+        <div class="card card-default">
+            <div class="card-header">
+              <div class="card-title">Acesso a consulta</div>
+            </div>
+            <div class="card-body">
+              <div class="form-group"><label class="col-form-label">Senha de acesso*</label><input class="form-control" type="password" name="password" required></div>
+              <p class="mb-3 text-danger">
+                {{ elIf('<span>$self</span>', getErrorFor('general'), hasErrorFor('general'))}}
+              </p>
+            </div>
+            <div class="card-footer"><button class="btn btn-primary" type="submit">ENTRAR</button></div>
+        </div><!-- END card-->
+      </form>
+  </div>
+</div>
+</body>
+<!-- MODERNIZR-->
+{{ script('/vendor/bootstrap/dist/js/bootstrap.js') }}
+{{ script('/js/app.js') }}
+</html>
